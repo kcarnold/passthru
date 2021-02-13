@@ -9,24 +9,8 @@ import Cocoa
 import AVFoundation
 
 class ViewController: NSViewController, AVCaptureAudioDataOutputSampleBufferDelegate {
-    let captureSession = AVCaptureSession()
     private let engine = AVAudioEngine()
 
-    
-    func getDevice(name: String) -> AVCaptureDevice {
-        print("All devices:")
-        for device in AVCaptureDevice.devices() {
-            print(" - \(device.localizedName)")
-        }
-        for device in AVCaptureDevice.devices() {
-            if (device.localizedName.lowercased() == name.lowercased()) {
-                return device;
-            }
-        }
-        print("Device \(name) not found, falling back to default.")
-        return AVCaptureDevice.default(for: .audio)!
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
