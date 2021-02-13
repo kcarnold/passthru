@@ -11,6 +11,7 @@
 		700C9F7A25BD09B500C17C14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F7925BD09B500C17C14 /* ViewController.swift */; };
 		700C9F7C25BD09B800C17C14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 700C9F7B25BD09B800C17C14 /* Assets.xcassets */; };
 		700C9F7F25BD09B800C17C14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700C9F7D25BD09B800C17C14 /* Main.storyboard */; };
+		700C9F8A25BD117D00C17C14 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F8925BD117D00C17C14 /* AudioSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		700C9F7E25BD09B800C17C14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		700C9F8025BD09B800C17C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		700C9F8125BD09B800C17C14 /* TestCapture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestCapture.entitlements; sourceTree = "<group>"; };
+		700C9F8925BD117D00C17C14 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				700C9F7725BD09B500C17C14 /* AppDelegate.swift */,
 				700C9F7925BD09B500C17C14 /* ViewController.swift */,
+				700C9F8925BD117D00C17C14 /* AudioSource.swift */,
 				700C9F7B25BD09B800C17C14 /* Assets.xcassets */,
 				700C9F7D25BD09B800C17C14 /* Main.storyboard */,
 				700C9F8025BD09B800C17C14 /* Info.plist */,
@@ -134,6 +137,7 @@
 			files = (
 				700C9F7A25BD09B500C17C14 /* ViewController.swift in Sources */,
 				700C9F7825BD09B500C17C14 /* AppDelegate.swift in Sources */,
+				700C9F8A25BD117D00C17C14 /* AudioSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
