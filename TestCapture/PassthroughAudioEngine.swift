@@ -46,13 +46,17 @@ class PassthroughAudioEngine {
             var power = Float(0.0);
             let channelCount = Int(buffer.format.channelCount);
 
-            var whenMut = when.audioTimeStamp
-            var leftOutBuf = TPCircularBufferPrepareEmptyAudioBufferListWithAudioFormat(
-                &self.leftBuffer, self.outputFormat.streamDescription, bufferSize, &whenMut)!
-            //(&self.leftBuffer, 2, UInt32(512), nil)
-            //let tgtData = UnsafeMutableAudioBufferListPointer(leftOutBuf);
+            var timestamp = when.audioTimeStamp
             
-            TPCircularBufferProduceAudioBufferList(&self.leftBuffer, &whenMut)
+            TPCircularBufferCopyAudioBufferList(&self.leftBuffer, buffer.audioBufferList, &timestamp, kTPCircularBufferCopyAll, buffer.format.streamDescription)
+//            var leftOutBuf = TPCircularBufferPrepareEmptyAudioBufferListWithAudioFormat(
+//                &self.leftBuffer, self.outputFormat.streamDescription, bufferSize, &whenMut)!
+//
+//
+//            //(&self.leftBuffer, 2, UInt32(512), nil)
+//            //let tgtData = UnsafeMutableAudioBufferListPointer(leftOutBuf);
+//
+//            TPCircularBufferProduceAudioBufferList(&self.leftBuffer, &whenMut)
             
             for channel in 0..<channelCount {
                 let srcData = buffer.floatChannelData![channel]
