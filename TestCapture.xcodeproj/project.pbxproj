@@ -11,8 +11,24 @@
 		700C9F7A25BD09B500C17C14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F7925BD09B500C17C14 /* ViewController.swift */; };
 		700C9F7C25BD09B800C17C14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 700C9F7B25BD09B800C17C14 /* Assets.xcassets */; };
 		700C9F7F25BD09B800C17C14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700C9F7D25BD09B800C17C14 /* Main.storyboard */; };
-		700C9F8A25BD117D00C17C14 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F8925BD117D00C17C14 /* AudioSource.swift */; };
+		700C9F8A25BD117D00C17C14 /* PassthroughAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F8925BD117D00C17C14 /* PassthroughAudioEngine.swift */; };
+		70277F0525D8B5C500F488DF /* libsamplerate.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */; };
+		70277F0625D8B5C500F488DF /* libsamplerate.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		70C44A4D25D892AF00C98C10 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				70277F0625D8B5C500F488DF /* libsamplerate.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		700C9F7425BD09B500C17C14 /* TestCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,7 +38,8 @@
 		700C9F7E25BD09B800C17C14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		700C9F8025BD09B800C17C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		700C9F8125BD09B800C17C14 /* TestCapture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestCapture.entitlements; sourceTree = "<group>"; };
-		700C9F8925BD117D00C17C14 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
+		700C9F8925BD117D00C17C14 /* PassthroughAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughAudioEngine.swift; sourceTree = "<group>"; };
+		70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsamplerate.0.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +47,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70277F0525D8B5C500F488DF /* libsamplerate.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7002879125D88F450005A2CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		700C9F6B25BD09B500C17C14 = {
 			isa = PBXGroup;
 			children = (
 				700C9F7625BD09B500C17C14 /* TestCapture */,
 				700C9F7525BD09B500C17C14 /* Products */,
+				7002879125D88F450005A2CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,7 +84,7 @@
 			children = (
 				700C9F7725BD09B500C17C14 /* AppDelegate.swift */,
 				700C9F7925BD09B500C17C14 /* ViewController.swift */,
-				700C9F8925BD117D00C17C14 /* AudioSource.swift */,
+				700C9F8925BD117D00C17C14 /* PassthroughAudioEngine.swift */,
 				700C9F7B25BD09B800C17C14 /* Assets.xcassets */,
 				700C9F7D25BD09B800C17C14 /* Main.storyboard */,
 				700C9F8025BD09B800C17C14 /* Info.plist */,
@@ -76,6 +103,7 @@
 				700C9F7025BD09B500C17C14 /* Sources */,
 				700C9F7125BD09B500C17C14 /* Frameworks */,
 				700C9F7225BD09B500C17C14 /* Resources */,
+				70C44A4D25D892AF00C98C10 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -137,7 +165,7 @@
 			files = (
 				700C9F7A25BD09B500C17C14 /* ViewController.swift in Sources */,
 				700C9F7825BD09B500C17C14 /* AppDelegate.swift in Sources */,
-				700C9F8A25BD117D00C17C14 /* AudioSource.swift in Sources */,
+				700C9F8A25BD117D00C17C14 /* PassthroughAudioEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,12 +306,17 @@
 				CODE_SIGN_ENTITLEMENTS = TestCapture/TestCapture.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6P353F88KG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TestCapture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.kenarnold.TestCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -299,12 +332,17 @@
 				CODE_SIGN_ENTITLEMENTS = TestCapture/TestCapture.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6P353F88KG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TestCapture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.kenarnold.TestCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
