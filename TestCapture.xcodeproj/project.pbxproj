@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		700C9F8A25BD117D00C17C14 /* PassthroughAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9F8925BD117D00C17C14 /* PassthroughAudioEngine.swift */; };
 		70277F0525D8B5C500F488DF /* libsamplerate.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */; };
 		70277F0625D8B5C500F488DF /* libsamplerate.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 70277F0425D8B5C500F488DF /* libsamplerate.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		70277F0925D8C29E00F488DF /* CTPCircularBuffer in Frameworks */ = {isa = PBXBuildFile; productRef = 70277F0825D8C29E00F488DF /* CTPCircularBuffer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70277F0525D8B5C500F488DF /* libsamplerate.0.dylib in Frameworks */,
+				70277F0925D8C29E00F488DF /* CTPCircularBuffer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +112,9 @@
 			dependencies = (
 			);
 			name = TestCapture;
+			packageProductDependencies = (
+				70277F0825D8C29E00F488DF /* CTPCircularBuffer */,
+			);
 			productName = TestCapture;
 			productReference = 700C9F7425BD09B500C17C14 /* TestCapture.app */;
 			productType = "com.apple.product-type.application";
@@ -137,6 +142,9 @@
 				Base,
 			);
 			mainGroup = 700C9F6B25BD09B500C17C14;
+			packageReferences = (
+				70277F0725D8C29E00F488DF /* XCRemoteSwiftPackageReference "TPCircularBuffer" */,
+			);
 			productRefGroup = 700C9F7525BD09B500C17C14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -372,6 +380,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		70277F0725D8C29E00F488DF /* XCRemoteSwiftPackageReference "TPCircularBuffer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivlevAstef/TPCircularBuffer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		70277F0825D8C29E00F488DF /* CTPCircularBuffer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70277F0725D8C29E00F488DF /* XCRemoteSwiftPackageReference "TPCircularBuffer" */;
+			productName = CTPCircularBuffer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 700C9F6C25BD09B500C17C14 /* Project object */;
 }

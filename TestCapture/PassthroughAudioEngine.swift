@@ -7,10 +7,14 @@
 
 import Foundation
 import AVFoundation
+import CTPCircularBuffer
 
 class PassthroughAudioEngine {
     private let inputEngine = AVAudioEngine()
     private let outputEngine = AVAudioEngine()
+
+    var leftBuffer: TPCircularBuffer
+    var rightBuffer: TPCircularBuffer
 
     var masterBuffer: AVAudioPCMBuffer
 
@@ -27,26 +31,40 @@ class PassthroughAudioEngine {
         
         currentPhase = 0.0
         amplitude = 0.0
+        
+        leftBuffer = TPCircularBuffer()
+        rightBuffer = TPCircularBuffer()
+        _TPCircularBufferInit(&leftBuffer, 480000, MemoryLayout<TPCircularBuffer>.size)
+        _TPCircularBufferInit(&rightBuffer, 480000, MemoryLayout<TPCircularBuffer>.size)
     }
     
     fileprivate func prepareInputEngine() {
-        inputEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: inputEngine.inputNode.inputFormat(forBus: 0)) {
+        let inputFormat = inputEngine.inputNode.inputFormat(forBus: 0)
+        inputEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) {
             buffer, when in
             let bufferSize = buffer.frameLength
             var power = Float(0.0);
             let channelCount = Int(buffer.format.channelCount);
+
+            var whenMut = when.audioTimeStamp
+            var leftOutBuf = TPCircularBufferPrepareEmptyAudioBufferListWithAudioFormat(
+                &self.leftBuffer, self.outputFormat.streamDescription, bufferSize, &whenMut)!
+            //(&self.leftBuffer, 2, UInt32(512), nil)
+            //let tgtData = UnsafeMutableAudioBufferListPointer(leftOutBuf);
+            
+            TPCircularBufferProduceAudioBufferList(&self.leftBuffer, &whenMut)
             
             for channel in 0..<channelCount {
                 let srcData = buffer.floatChannelData![channel]
-                let tgtData = self.masterBuffer.floatChannelData![channel]
+                //self.masterBuffer.floatChannelData![channel]
                 for frame in 0..<Int(buffer.frameLength) {
-                    tgtData[frame] = srcData[frame]
+//                    tgtData[frame] = srcData[frame]
                     power += pow(srcData[frame], 2)
                 }
             }
             self.masterBuffer.frameLength = buffer.frameLength
             print("Input buffer! \(channelCount) \(bufferSize) \(when.isHostTimeValid) \(power / Float(bufferSize))")
-            self.amplitude = power * 10
+            self.amplitude = 0.5//power * 1
         }
         
         inputEngine.prepare()
@@ -74,18 +92,15 @@ class PassthroughAudioEngine {
             let audioBufferListPtr = UnsafeMutableAudioBufferListPointer(audioBufferList)
             print("Output buffer! \(frameCount) \(audioBufferListPtr.count)")
 
-            let masterBufferMut = UnsafeMutableAudioBufferListPointer(self.masterBuffer.mutableAudioBufferList)
+            var samplesInBuffer = TPCircularBufferPeek(&self.leftBuffer, nil, outputFormat.streamDescription)
+            
+            //TPCircularBufferConsumeNextBufferListPartial(&self.leftBuffer, UInt32(audioBufferListPtr.count), outputFormat.streamDescription)
+            var ioLengthInFrames = UInt32(frameCount)
+            TPCircularBufferDequeueBufferListFrames(&self.leftBuffer, &ioLengthInFrames, nil, nil, outputFormat.streamDescription)
+//            TPCircularBufferConsumeNextBufferList(&self.leftBuffer)
+            print("samples: \(samplesInBuffer) consumed \(ioLengthInFrames)")
 
             for frame in 0..<Int(frameCount) {
-                // Advance the phase for the next frame.
-                self.currentPhase += phaseIncrement
-                if self.currentPhase >= twoPi {
-                    self.currentPhase -= twoPi
-                }
-                if self.currentPhase < 0.0 {
-                    self.currentPhase += twoPi
-                }
-                //for (masterBufferChannel, outBufferChannel) in zip(masterBufferMut, audioBufferListPtr) {
 
                 for (i, outBufferChannel) in audioBufferListPtr.enumerated() {
                     let outBuf: UnsafeMutableBufferPointer<Float> = UnsafeMutableBufferPointer(outBufferChannel)
